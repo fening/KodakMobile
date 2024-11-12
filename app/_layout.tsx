@@ -1,37 +1,59 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+// app/_layout.tsx
+import { Stack, useRouter, useSegments } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import { useAuth } from '../hooks/useAuth'; // Use your custom useAuth hook
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+  const { isAuthenticated, checkAuthStatus } = useAuth();
+  const [initializing, setInitializing] = useState(true);
+  const router = useRouter();
+  const segments = useSegments();
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+    const initAuth = async () => {
+      await checkAuthStatus();
+      setInitializing(false);
+    };
 
-  if (!loaded) {
-    return null;
+    initAuth();
+  }, []);
+
+  useEffect(() => {
+    if (initializing) return;
+
+    const inAuthGroup = segments[0] === '(auth)';
+
+    if (isAuthenticated && inAuthGroup) {
+      router.replace('/(tabs)'); // Redirect to home (index.tsx) when logged in
+    } else if (!isAuthenticated && !inAuthGroup) {
+      router.replace('/(auth)/login'); // Redirect to login if not authenticated
+    }
+  }, [isAuthenticated, initializing]);
+
+  if (initializing) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Stack>
+      {/* Auth Screens */}
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      
+      {/* Main App (Tabs) Screens */}
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      
+      {/* Record Screens */}
+      <Stack.Screen name="records/[id]" options={{ title: 'Record Details' }} />
+      <Stack.Screen name="records/new" options={{ title: 'New Record' }} />
+      <Stack.Screen name="records/[id]/edit" options={{ title: 'Edit Record' }} />
+
+      {/* Not Found Page */}
+      <Stack.Screen name="+not-found" options={{ title: 'Oops!' }} />
+    </Stack>
   );
 }
