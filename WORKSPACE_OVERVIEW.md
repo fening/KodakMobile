@@ -1,6 +1,6 @@
-# Kodak Workspace Overview
+# kodak
 
-Single-file overview of the Kodak monorepo (all projects merged into this repo).
+Single-file overview of the kodak monorepo (all projects in this repo).
 
 ---
 
@@ -41,7 +41,7 @@ Single-file overview of the Kodak monorepo (all projects merged into this repo).
 
 ---
 
-## 3. KodakMobile — Mobile app (root of this repo)
+## 3. kodak — Mobile app (root of this repo)
 
 **Path in repo:** root (`app/`, `components/`, `services/`, etc.)
 
@@ -49,7 +49,7 @@ Single-file overview of the Kodak monorepo (all projects merged into this repo).
 - **Styling:** NativeWind / Tailwind-style (tailwind.config.js).
 - **Key deps:** axios, react-native-chart-kit, react-native-elements, react-native-gesture-handler, react-native-reanimated, expo-dev-client.
 - **Targets:** iOS, Android, web.
-- **Bundle IDs:** `com.kokai1.KodakMobile`.
+- **Bundle IDs:** `com.kokai1.kodak`.
 - **EAS:** Project ID in `app.json` (extra.eas.projectId).
 - **Layout:** `app/`, `components/`, `constants/`, `hooks/`, `services/`, `assets/`, `scripts/`, `app-example/`.
 - **Scripts:** `npm start` (expo start), `npm run android`, `npm run ios`, `npm run web`, `npm run lint`.
