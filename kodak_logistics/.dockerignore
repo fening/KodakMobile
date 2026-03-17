@@ -1,0 +1,8 @@
+.venv/
+env/
+venv/
+.vscode/
+**/__pycache__
+**/*.pyc
+kodak-frontend/node_modules/
+kodak-frontend/build/

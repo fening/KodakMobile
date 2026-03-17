@@ -1,22 +1,22 @@
 # Kodak Workspace Overview
 
-Single-file overview of all projects in the Kodak workspace.
+Single-file overview of the Kodak monorepo (all projects merged into this repo).
 
 ---
 
-## 1. kodak — Design & assets
+## 1. design — Design & assets (from kodak)
 
-**Path:** `C:\Users\fenin\apps\kodak`
+**Path in repo:** `design/`
 
 - **Purpose:** Design and brand assets (no application code).
-- **Contents:** `.git`, `design-assets`, `Logo`, `Logo.zip`.
+- **Contents:** `design-assets/`, `Logo/`, `Logo.zip`.
 - **Note:** Shared brand/design assets for Kodak-related projects.
 
 ---
 
 ## 2. kodak_logistics — Web stack (backend + frontend)
 
-**Path:** `C:\Users\fenin\apps\kodak_logistics`
+**Path in repo:** `kodak_logistics/`
 
 ### Backend: kodak_transport
 
@@ -41,9 +41,9 @@ Single-file overview of all projects in the Kodak workspace.
 
 ---
 
-## 3. KodakMobile — Mobile app (this repo)
+## 3. KodakMobile — Mobile app (root of this repo)
 
-**Path:** `C:\Users\fenin\apps\KodakMobile`
+**Path in repo:** root (`app/`, `components/`, `services/`, etc.)
 
 - **Stack:** Expo (React Native), Expo SDK ~51, file-based routing (expo-router).
 - **Styling:** NativeWind / Tailwind-style (tailwind.config.js).
@@ -56,10 +56,10 @@ Single-file overview of all projects in the Kodak workspace.
 
 ---
 
-## Summary
+## Summary (monorepo layout)
 
-| Workspace       | Type            | Tech                          |
+| Folder          | Type            | Tech                          |
 |-----------------|-----------------|-------------------------------|
-| kodak           | Assets          | Design files, logos           |
-| kodak_logistics | Backend + Web   | Django REST, React (CRA)      |
-| KodakMobile     | Mobile (git)    | Expo / React Native           |
+| design/         | Assets          | Design files, logos           |
+| kodak_logistics/| Backend + Web   | Django REST, React (CRA)      |
+| (root)          | Mobile app      | Expo / React Native           |
