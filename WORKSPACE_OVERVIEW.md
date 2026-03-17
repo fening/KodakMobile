@@ -41,7 +41,7 @@ Single-file overview of the kodak monorepo (all projects in this repo).
 
 ---
 
-## 3. kodak — Mobile app (root of this repo)
+## 3. Kodak Mobile — Mobile app (root of this repo)
 
 **Path in repo:** root (`app/`, `components/`, `services/`, etc.)
 
